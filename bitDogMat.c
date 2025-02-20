@@ -142,7 +142,6 @@ void startDisplay()
 
   sprintf(inicio_str, "Aperte A");
   sprintf(regra_str, "Para iniciar");
-  sprintf(joystck_str, "Mova o joystick");
   sprintf(botaoA_str, "A para responder");
   sprintf(botaoB_str, "B para proxima");
 
@@ -209,6 +208,12 @@ void WrongAnswer()
 
   gpio_put(LED_G, 0);
   gpio_put(LED_R, 1);
+
+  while (gpio_get(BUTTON_B) == 0) // Botão B pressionado
+  {
+    startDisplay();
+    sleep_ms(100);
+  }
 }
 
 bool countdown_callback(struct repeating_timer *t)
@@ -231,7 +236,7 @@ void turnOnLED()
 {
   if (led_count < LED_COUNT)
   {
-    npSetLED(led_index[led_count], 0, 0, 50); // Acende o LED
+    npSetLED(led_index[led_count], 25, 20, 00); // Acende o LED
     led_count++;
     npWrite();
   }
