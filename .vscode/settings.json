@@ -46,6 +46,8 @@
         "limits": "c",
         "tuple": "c",
         "ctype.h": "c",
-        "time.h": "c"
+        "time.h": "c",
+        "clocks.h": "c",
+        "binary_info.h": "c"
     }
 }

@@ -50,6 +50,7 @@ target_link_libraries(bitDogMat
         pico_stdlib
         hardware_adc
         hardware_pwm
+        hardware_clocks
         
         )
 

@@ -2,14 +2,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
 #include "pico/stdlib.h"
 #include "pico/binary_info.h"
 #include "hardware/pwm.h"
 #include "hardware/pio.h"
 #include "hardware/adc.h"
+#include "hardware/clocks.h"
 #include "ssd1306.h"
 #include "ws2818b.pio.h"
-#include <time.h>
 
 // Definição dos pinos de botões
 #define JOYSTICK_Y 26
@@ -18,13 +19,12 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
-
-
 // Definição do número de LEDs e pino
 #define LED_COUNT 25
 #define LED_PIN 7
 #define LED_R 13
 #define LED_G 11
+
 
 
 // Definição dos pinos de comunicação I2C
@@ -182,7 +182,6 @@ void updateDisplay()
 
 void WrongAnswer()
 {
-  
   point = 0;
   countdown = 0;
   
@@ -311,6 +310,7 @@ void nextMath()
     sleep_ms(200); // Debouncing
   }
 }
+
 // configuração do sistema
 void setup()
 {
@@ -343,6 +343,8 @@ void setup()
   gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);
   gpio_set_function(I2C_SCL, GPIO_FUNC_I2C);
 
+
+
   gpio_pull_up(I2C_SDA);
   gpio_pull_up(I2C_SCL);
 
@@ -352,8 +354,6 @@ void setup()
   memset(ssd, 0, ssd1306_buffer_length);            // Zera o display
   render_on_display(ssd, &frame_area);
   startDisplay(); // Inicializa o display com o contador de LEDs
-
-  
 
   // Configuração dos botões
   gpio_init(BUTTON_A);
